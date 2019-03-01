@@ -1,33 +1,33 @@
-import { Model } from 'mongoose';
-import { Injectable, Inject } from '@nestjs/common';
-import { IUser } from './intefaces/user.interface';
-import { CreateUserDto } from './dto/create-user.dto';
-import * as jwt from 'jsonwebtoken';
-import { User } from '../../types/User/user';
-import { JwtPayloadData } from '../../types/jwtPayloadData/jwtPayloadData';
+import { Model } from "mongoose";
+import { Injectable, Inject } from "@nestjs/common";
+import { IUser } from "./intefaces/user.interface";
+import { CreateUserDto } from "./dto/create-user.dto";
+import * as jwt from "jsonwebtoken";
+import { User } from "../../types/User/user";
+import { JwtPayloadData } from "../../types/jwtPayloadData/jwtPayloadData";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject('UserModelToken')
-    private readonly userModel: Model<IUser>,
+    @Inject("UserModelToken")
+    private readonly userModel: Model<IUser>
   ) {}
 
   public async createToken(user: User): Promise<User> {
     const time = 600000000;
-    const secret = 'user';
+    const secret = "user";
     const expiresIn: number = Date.now() + time;
 
     const payload: JwtPayloadData = {
       email: user.email,
-      expiresIn,
+      expiresIn
     };
 
     const accessToken: string = jwt.sign(payload, secret, { expiresIn });
     return {
       ...user,
       expiresIn,
-      accessToken,
+      accessToken
     };
   }
 
@@ -37,7 +37,7 @@ export class UsersService {
   }
   public async validateUser(email: string): Promise<boolean> {
     const user: IUser | null = await this.userModel.findOne({
-      where: { email },
+      where: { email }
     });
     if (!user) {
       return false;
