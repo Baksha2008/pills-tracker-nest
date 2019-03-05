@@ -8,15 +8,16 @@ import { JwtStrategy } from "./passport/jwt.strategy";
 import { DatabaseModule } from "src/database/database.module";
 import { UsersController } from "./users.controller";
 import { usersProviders } from "./users.providers";
+import { CONFIG } from "src/constants/config";
 
 @Module({
   imports: [
     DatabaseModule,
     PassportModule.register({ defaultStrategy: "jwt" }),
     JwtModule.register({
-      secretOrPrivateKey: config.get("expireTime"),
+      secretOrPrivateKey: config.get(CONFIG.jwtConf),
       signOptions: {
-        expiresIn: config.get("jwtConf")
+        expiresIn: config.get(CONFIG.expireTime)
       }
     })
   ],
