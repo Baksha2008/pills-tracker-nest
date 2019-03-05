@@ -2,13 +2,14 @@ import { Connection } from "mongoose";
 
 import { UserSchema } from "./schemas/user.schema";
 
-import { DB_PROVIDERS, USER } from "./constants/constatnts.db";
-import { DB_CONNECTION_TOKEN } from "../constants/constants.db";
+import { USER_COLLECTION } from "../constants/collections";
+import { MONGO_PROVIDER, USER_MODEL_PROVIDER } from "../constants/providers";
 
 export const usersProviders = [
   {
-    provide: DB_PROVIDERS,
-    useFactory: (connection: Connection) => connection.model(USER, UserSchema),
-    inject: [DB_CONNECTION_TOKEN]
+    provide: USER_MODEL_PROVIDER,
+    useFactory: (connection: Connection) =>
+      connection.model(USER_COLLECTION, UserSchema),
+    inject: [MONGO_PROVIDER]
   }
 ];

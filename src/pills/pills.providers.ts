@@ -2,13 +2,14 @@ import { Connection } from "mongoose";
 
 import { PillSchema } from "./schemas/pill.schema";
 
-import { DB_PROVIDERS, PILL } from "./constants/constants.db";
-import { DB_CONNECTION_TOKEN } from "../constants/constants.db";
+import { PILL_COLLECTION } from "../constants/collections";
+import { MONGO_PROVIDER, PILL_MODEL_PROVIDER } from "../constants/providers";
 
 export const pillsProviders = [
   {
-    provide: DB_PROVIDERS,
-    useFactory: (connection: Connection) => connection.model(PILL, PillSchema),
-    inject: [DB_CONNECTION_TOKEN]
+    provide: PILL_MODEL_PROVIDER,
+    useFactory: (connection: Connection) =>
+      connection.model(PILL_COLLECTION, PillSchema),
+    inject: [MONGO_PROVIDER]
   }
 ];

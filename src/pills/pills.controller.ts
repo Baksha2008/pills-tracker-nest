@@ -5,10 +5,10 @@ import {
   Res,
   Get,
   HttpStatus,
-  Param,
   Put,
-  Req,
-  UseGuards
+  UseGuards,
+  Param,
+  Req
 } from "@nestjs/common";
 import { Response } from "express";
 import { AuthGuard } from "@nestjs/passport";
@@ -17,11 +17,10 @@ import { IPill } from "./interface/pill.interface";
 import { PillsService } from "./pills.service";
 import { CreatePillDto } from "./dto/pills.dto";
 
-import { PILLS_ROUTE } from "../constants/collection";
-import { ROUTES } from "../constants/routes";
+import { PILLS_ROUTES } from "./pills.routes";
 import { STATUS_MESSAGE } from "../constants/statusMessage";
 
-@Controller(PILLS_ROUTE)
+@Controller(PILLS_ROUTES.main)
 export class PillsContoller {
   constructor(private readonly pillsService: PillsService) {}
   @Post()
@@ -41,7 +40,12 @@ export class PillsContoller {
     }
   }
 
-  @Get(ROUTES.pillId)
+  @Get(PILLS_ROUTES.get)
+  @UseGuards(AuthGuard())
+  public async getPills(@Param() params): Promise<IPill[]> {
+    return this.pillsService.getPill(params.userId);
+  }
+  @Put(PILLS_ROUTES.put)
   public async updatePill(
     @Req() req,
     @Body() data: CreatePillDto,

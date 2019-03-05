@@ -15,7 +15,7 @@ import { CONFIG } from "src/constants/config";
     DatabaseModule,
     PassportModule.register({ defaultStrategy: "jwt" }),
     JwtModule.register({
-      secretOrPrivateKey: config.get(CONFIG.jwtConf),
+      secretOrPrivateKey: config.get(CONFIG.secret),
       signOptions: {
         expiresIn: config.get(CONFIG.expireTime)
       }

@@ -5,25 +5,24 @@ import * as config from "config";
 
 import { IUser } from "./intefaces/user.interface";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { IConfig } from "../../types/config";
 import { User } from "../../types/user";
 import { JwtPayloadData } from "../../types/jwtPayloadData";
 import { ILoginUser } from "../../types/user";
 
-import { DB_PROVIDERS } from "./constants/constatnts.db";
+import { USER_MODEL_PROVIDER } from "../constants/providers";
 import { CONFIG } from "../constants/config";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(DB_PROVIDERS)
+    @Inject(USER_MODEL_PROVIDER)
     private readonly userModel: Model<IUser>
   ) {}
 
   public async createToken(user: User): Promise<User> {
-    const { time }: IConfig["expireTime"] = config.get(CONFIG.expireTime);
-    const { secret }: IConfig["jwtConf"] = config.get(CONFIG.jwtConf);
-    const expiresIn: number = time + Date.now();
+    const expireTime = config.get(CONFIG.expireTime);
+    const secret = config.get(CONFIG.secret);
+    const expiresIn: number = expireTime + Date.now();
 
     const payload: JwtPayloadData = {
       email: user.email,

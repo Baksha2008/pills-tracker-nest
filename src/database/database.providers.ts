@@ -1,15 +1,15 @@
 import * as mongoose from "mongoose";
 import * as config from "config";
 
-import { DB_CONNECTION_TOKEN } from "../constants/constants.db";
+import { MONGO_PROVIDER } from "../constants/providers";
 import { CONFIG } from "../constants/config";
 
-const { path } = config.get(CONFIG.appConfig);
+const dbpath = config.get(CONFIG.dbpath);
 
 export const databaseProviders = [
   {
-    provide: DB_CONNECTION_TOKEN,
+    provide: MONGO_PROVIDER,
     useFactory: async (): Promise<typeof mongoose> =>
-      await mongoose.connect(path, { useNewUrlParser: true })
+      await mongoose.connect(dbpath, { useNewUrlParser: true })
   }
 ];

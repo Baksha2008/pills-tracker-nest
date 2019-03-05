@@ -1,5 +1,6 @@
 export const CONFIG = {
-  expireTime: "expireTime",
-  jwtConf: "jwtConf",
-  appConfig: "appConfig"
+  port: "port",
+  dbpath: "dbpath",
+  secret: "secret",
+  expireTime: "expireTime"
 };
