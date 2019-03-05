@@ -1,12 +1,15 @@
 import { Model } from "mongoose";
 import { Injectable, Inject } from "@nestjs/common";
+
 import { IPill } from "./interface/pill.interface";
 import { CreatePillDto } from "./dto";
+
+import { PILL_MODEL_PROVIDER } from "../constants/providers";
 
 @Injectable()
 export class PillsService {
   constructor(
-    @Inject("PillModelToken")
+    @Inject(PILL_MODEL_PROVIDER)
     private readonly pillModel: Model<IPill>
   ) {}
   public async createPill(createPillDto: CreatePillDto): Promise<IPill> {

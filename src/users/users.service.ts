@@ -1,23 +1,28 @@
 import { Model } from "mongoose";
 import { Injectable, Inject } from "@nestjs/common";
+import * as jwt from "jsonwebtoken";
+import * as config from "config";
+
 import { IUser } from "./intefaces/user.interface";
 import { CreateUserDto } from "./dto/create-user.dto";
-import * as jwt from "jsonwebtoken";
-import { User } from "../../types/User/user";
-import { JwtPayloadData } from "../../types/jwtPayloadData/jwtPayloadData";
-import { ILoginUser } from "../../types/User/user";
+import { User } from "../../types/user";
+import { JwtPayloadData } from "../../types/jwtPayloadData";
+import { ILoginUser } from "../../types/user";
+
+import { USER_MODEL_PROVIDER } from "../constants/providers";
+import { CONFIG } from "../constants/config";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject("UserModelToken")
+    @Inject(USER_MODEL_PROVIDER)
     private readonly userModel: Model<IUser>
   ) {}
 
   public async createToken(user: User): Promise<User> {
-    const time = 600000000;
-    const secret = "user";
-    const expiresIn: number = Date.now() + time;
+    const expireTime = config.get(CONFIG.expireTime);
+    const secret = config.get(CONFIG.secret);
+    const expiresIn: number = expireTime + Date.now();
 
     const payload: JwtPayloadData = {
       email: user.email,

@@ -1,10 +1,10 @@
 import { Module } from "@nestjs/common";
+import { PassportModule } from "@nestjs/passport";
+
 import { PillsContoller } from "./pills.controller";
 import { PillsService } from "./pills.service";
 import { pillsProviders } from "./pills.providers";
 import { DatabaseModule } from "../database/database.module";
-import { PassportModule } from "@nestjs/passport";
-
 import { UsersModule } from "src/users/users.module";
 
 @Module({
