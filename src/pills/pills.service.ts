@@ -4,7 +4,7 @@ import { Injectable, Inject } from "@nestjs/common";
 import { IPill } from "./interface/pill.interface";
 import { CreatePillDto } from "./dto";
 
-import { DB_PROVIDERS } from "./constants/constants";
+import { DB_PROVIDERS } from "./constants/constants.db";
 
 @Injectable()
 export class PillsService {

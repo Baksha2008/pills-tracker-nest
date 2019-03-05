@@ -2,11 +2,8 @@ import { Connection } from "mongoose";
 
 import { PillSchema } from "./schemas/pill.schema";
 
-import {
-  DB_PROVIDERS,
-  PILL,
-  DB_CONNECTION_TOKEN
-} from "./constants/constants";
+import { DB_PROVIDERS, PILL } from "./constants/constants.db";
+import { DB_CONNECTION_TOKEN } from "../constants/constants.db";
 
 export const pillsProviders = [
   {

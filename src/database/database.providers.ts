@@ -1,7 +1,7 @@
 import * as mongoose from "mongoose";
 import * as config from "config";
 
-import { DB_CONNECTION_TOKEN } from "./constants/constants";
+import { DB_CONNECTION_TOKEN } from "../constants/constants.db";
 import { CONFIG } from "../constants/config";
 
 const { path } = config.get(CONFIG.appConfig);

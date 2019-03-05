@@ -10,7 +10,7 @@ import { User } from "../../types/user";
 import { JwtPayloadData } from "../../types/jwtPayloadData";
 import { ILoginUser } from "../../types/user";
 
-import { DB_PROVIDERS } from "./constants/constatnts";
+import { DB_PROVIDERS } from "./constants/constatnts.db";
 import { CONFIG } from "../constants/config";
 
 @Injectable()

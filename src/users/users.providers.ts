@@ -2,11 +2,8 @@ import { Connection } from "mongoose";
 
 import { UserSchema } from "./schemas/user.schema";
 
-import {
-  DB_PROVIDERS,
-  USER,
-  DB_CONNECTION_TOKEN
-} from "./constants/constatnts";
+import { DB_PROVIDERS, USER } from "./constants/constatnts.db";
+import { DB_CONNECTION_TOKEN } from "../constants/constants.db";
 
 export const usersProviders = [
   {
