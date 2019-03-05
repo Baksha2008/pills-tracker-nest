@@ -1,12 +1,12 @@
 import * as mongoose from "mongoose";
+import * as config from "config";
+
+const { path } = config.get("DBRoute");
 
 export const databaseProviders = [
   {
     provide: "DbConnectionToken",
     useFactory: async (): Promise<typeof mongoose> =>
-      await mongoose.connect(
-        "mongodb+srv://test:12345@test-n5e25.mongodb.net/test?retryWrites=true",
-        { useNewUrlParser: true }
-      )
+      await mongoose.connect(path, { useNewUrlParser: true })
   }
 ];

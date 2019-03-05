@@ -1,0 +1,14 @@
+{
+  "appConfig": {
+    "port": 3001
+  },
+  "expireTime": {
+    "time": 600000
+  },
+  "jwtConf": {
+    "secret": "user"
+  },
+  "DBRoute": {
+    "path": "mongodb+srv://test:12345@test-n5e25.mongodb.net/test?retryWrites=true"
+  }
+}

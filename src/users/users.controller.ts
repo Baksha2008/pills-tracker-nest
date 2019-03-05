@@ -1,15 +1,20 @@
 import { Controller, Post, Body, Res, HttpStatus } from "@nestjs/common";
+import * as bcrypt from "bcrypt";
+import { Response } from "express";
+
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginUserDto } from "./dto/login_user.dto";
 import { UsersService } from "./users.service";
 import { User } from "../../types/User/user";
-import * as bcrypt from "bcrypt";
-import { Response } from "express";
 
-@Controller("users")
+import { USERS } from "../constants/collection";
+import { STATUS_MESSAGE } from "../constants/statusMessage";
+import { ROUTS } from "../constants/routs";
+
+@Controller(USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @Post("signup")
+  @Post(ROUTS.signUp)
   public async singUp(
     @Body() createUserDto: CreateUserDto,
     @Res() res: Response
@@ -20,8 +25,8 @@ export class UsersController {
       });
       if (user) {
         return res
-          .status(401)
-          .json({ data: { message: "This user already exists" } });
+          .status(HttpStatus.BAD_REQUEST)
+          .json({ data: { message: STATUS_MESSAGE.userAlredyExists } });
       }
       const hash: string = await bcrypt.hash(createUserDto.password, 10);
       const newUser: User = await this.usersService.createUser({
@@ -35,15 +40,15 @@ export class UsersController {
           _doc: newUser._doc,
           isNew: newUser.isNew
         };
-        return res.status(201).json({ data: UpdateUser });
+        return res.status(HttpStatus.OK).json({ data: UpdateUser });
       }
     } catch (err) {
       return res
         .status(HttpStatus.UNAUTHORIZED)
-        .json({ data: { error: "UNAUTHORIZED" } });
+        .json({ data: { error: STATUS_MESSAGE.unauthorized } });
     }
   }
-  @Post("signin")
+  @Post(ROUTS.singIn)
   public async signIn(
     @Body() loginUserDto: LoginUserDto,
     @Res() res: Response
@@ -62,7 +67,7 @@ export class UsersController {
     ) {
       return res
         .status(HttpStatus.UNAUTHORIZED)
-        .json({ data: { message: "UNAUTHORIZED" } });
+        .json({ data: { message: STATUS_MESSAGE.unauthorized } });
     }
 
     return res.status(HttpStatus.OK).json({ data: user });
