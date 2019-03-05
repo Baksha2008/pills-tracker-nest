@@ -4,12 +4,12 @@ import { Injectable, Inject } from "@nestjs/common";
 import { IPill } from "./interface/pill.interface";
 import { CreatePillDto } from "./dto";
 
-import { PILL_MODEL_TOKEN } from "./constants/constants";
+import { DB_PROVIDERS } from "./constants/constants";
 
 @Injectable()
 export class PillsService {
   constructor(
-    @Inject(PILL_MODEL_TOKEN)
+    @Inject(DB_PROVIDERS)
     private readonly pillModel: Model<IPill>
   ) {}
   public async createPill(createPillDto: CreatePillDto): Promise<IPill> {

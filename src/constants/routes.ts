@@ -1,4 +1,4 @@
-export const ROUTS = {
+export const ROUTES = {
   signUp: "singup",
   singIn: "signin",
   userID: ":userId",

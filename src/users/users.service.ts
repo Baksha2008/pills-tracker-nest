@@ -5,23 +5,24 @@ import * as config from "config";
 
 import { IUser } from "./intefaces/user.interface";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { IConfig } from "../../types/config/config";
-import { User } from "../../types/User/user";
-import { JwtPayloadData } from "../../types/jwtPayloadData/jwtPayloadData";
-import { ILoginUser } from "../../types/User/user";
+import { IConfig } from "../../types/config";
+import { User } from "../../types/user";
+import { JwtPayloadData } from "../../types/jwtPayloadData";
+import { ILoginUser } from "../../types/user";
 
-import { USER_MODEL_TOKEN } from "./constants/constatnts";
+import { DB_PROVIDERS } from "./constants/constatnts";
+import { CONFIG } from "../constants/config";
 
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(USER_MODEL_TOKEN)
+    @Inject(DB_PROVIDERS)
     private readonly userModel: Model<IUser>
   ) {}
 
   public async createToken(user: User): Promise<User> {
-    const { time }: IConfig["expireTime"] = config.get("expireTime");
-    const { secret }: IConfig["jwtConf"] = config.get("jwtConf");
+    const { time }: IConfig["expireTime"] = config.get(CONFIG.expireTime);
+    const { secret }: IConfig["jwtConf"] = config.get(CONFIG.jwtConf);
     const expiresIn: number = time + Date.now();
 
     const payload: JwtPayloadData = {

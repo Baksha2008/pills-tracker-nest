@@ -3,14 +3,14 @@ import { Connection } from "mongoose";
 import { UserSchema } from "./schemas/user.schema";
 
 import {
-  USER_MODEL_TOKEN,
+  DB_PROVIDERS,
   USER,
   DB_CONNECTION_TOKEN
 } from "./constants/constatnts";
 
 export const usersProviders = [
   {
-    provide: USER_MODEL_TOKEN,
+    provide: DB_PROVIDERS,
     useFactory: (connection: Connection) => connection.model(USER, UserSchema),
     inject: [DB_CONNECTION_TOKEN]
   }

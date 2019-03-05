@@ -17,11 +17,11 @@ import { IPill } from "./interface/pill.interface";
 import { PillsService } from "./pills.service";
 import { CreatePillDto } from "./dto/pills.dto";
 
-import { PILLS } from "../constants/collection";
-import { ROUTS } from "../constants/routs";
+import { PILLS_ROUTE } from "../constants/collection";
+import { ROUTES } from "../constants/routes";
 import { STATUS_MESSAGE } from "../constants/statusMessage";
 
-@Controller(PILLS)
+@Controller(PILLS_ROUTE)
 export class PillsContoller {
   constructor(private readonly pillsService: PillsService) {}
   @Post()
@@ -41,12 +41,7 @@ export class PillsContoller {
     }
   }
 
-  @Get(ROUTS.userID)
-  @UseGuards(AuthGuard())
-  public async getPills(@Param() params): Promise<IPill[]> {
-    return this.pillsService.getPill(params.userId);
-  }
-  @Put(ROUTS.pillId)
+  @Get(ROUTES.pillId)
   public async updatePill(
     @Req() req,
     @Body() data: CreatePillDto,

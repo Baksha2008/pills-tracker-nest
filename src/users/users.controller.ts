@@ -5,16 +5,16 @@ import { Response } from "express";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginUserDto } from "./dto/login_user.dto";
 import { UsersService } from "./users.service";
-import { User } from "../../types/User/user";
+import { User } from "../../types/user";
 
 import { USERS } from "../constants/collection";
 import { STATUS_MESSAGE } from "../constants/statusMessage";
-import { ROUTS } from "../constants/routs";
+import { ROUTES } from "../constants/routes";
 
 @Controller(USERS)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-  @Post(ROUTS.signUp)
+  @Post(ROUTES.signUp)
   public async singUp(
     @Body() createUserDto: CreateUserDto,
     @Res() res: Response
@@ -48,7 +48,7 @@ export class UsersController {
         .json({ data: { error: STATUS_MESSAGE.unauthorized } });
     }
   }
-  @Post(ROUTS.singIn)
+  @Post(ROUTES.singIn)
   public async signIn(
     @Body() loginUserDto: LoginUserDto,
     @Res() res: Response

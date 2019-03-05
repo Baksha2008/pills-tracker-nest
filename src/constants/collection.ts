@@ -1,2 +1,2 @@
 export const USERS = "users";
-export const PILLS = "pills";
+export const PILLS_ROUTE = "pills";
