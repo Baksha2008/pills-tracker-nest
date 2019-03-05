@@ -17,3 +17,7 @@ interface IDoc {
   password: string;
   __v: number;
 }
+export interface ILoginUser {
+  email: string;
+  password: string;
+}

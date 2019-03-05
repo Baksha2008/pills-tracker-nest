@@ -5,6 +5,7 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import * as jwt from "jsonwebtoken";
 import { User } from "../../types/User/user";
 import { JwtPayloadData } from "../../types/jwtPayloadData/jwtPayloadData";
+import { ILoginUser } from "../../types/User/user";
 
 @Injectable()
 export class UsersService {
@@ -35,14 +36,9 @@ export class UsersService {
     const user: User = await this.userModel.create(createUserDto);
     return await this.createToken(user as User);
   }
-  public async validateUser(email: string): Promise<boolean> {
-    const user: IUser | null = await this.userModel.findOne({
-      where: { email }
-    });
-    if (!user) {
-      return false;
-    }
-    return true;
+  async validateUser(token: ILoginUser): Promise<any> {
+    const payload = { email: token.email };
+    return await this.getUserWithToken(payload);
   }
   public async getUser(query: any): Promise<User | null> {
     let user: User | null;

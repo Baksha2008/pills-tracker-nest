@@ -1,7 +1,7 @@
 export class CreatePillDto {
   readonly id!: string;
-  readonly pillName!: string;
-  readonly pillType!: string;
-  readonly pillDose!: string;
+  readonly name!: string;
+  readonly type!: string;
+  readonly dose!: string;
   readonly userId!: string;
 }
