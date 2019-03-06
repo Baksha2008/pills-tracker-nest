@@ -19,9 +19,9 @@ export class PillsService {
     return await this.pillModel.find({ userId }).exec();
   }
   public async updatePill(
-    pillId: string,
+    pillid: string,
     data: CreatePillDto
   ): Promise<IPill[]> {
-    return await this.pillModel.update({ _id: pillId }, data).exec();
+    return await this.pillModel.update({ _id: pillid }, data).exec();
   }
 }

@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Res, HttpStatus } from "@nestjs/common";
 import * as bcrypt from "bcrypt";
 import { Response } from "express";
+import { ApiOperation, ApiResponse, ApiUseTags } from "@nestjs/swagger";
 
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginUserDto } from "./dto/login_user.dto";
@@ -10,10 +11,20 @@ import { User } from "../../types/user";
 import { STATUS_MESSAGE } from "../constants/statusMessage";
 import { USERS_ROUTES } from "./users.routes";
 
+@ApiUseTags(USERS_ROUTES.main)
 @Controller(USERS_ROUTES.main)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Post(USERS_ROUTES.signUp)
+  @ApiOperation({ title: STATUS_MESSAGE.signupTitle })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: STATUS_MESSAGE.signUpCreate
+  })
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: STATUS_MESSAGE.signUpError
+  })
   public async singUp(
     @Body() createUserDto: CreateUserDto,
     @Res() res: Response
@@ -48,6 +59,15 @@ export class UsersController {
     }
   }
   @Post(USERS_ROUTES.signIn)
+  @ApiOperation({ title: STATUS_MESSAGE.loginTitle })
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: STATUS_MESSAGE.loginDescription
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: STATUS_MESSAGE.loginError
+  })
   public async signIn(
     @Body() loginUserDto: LoginUserDto,
     @Res() res: Response
