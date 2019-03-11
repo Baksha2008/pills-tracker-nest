@@ -5,9 +5,9 @@ import * as config from "config";
 
 import { IUser } from "./intefaces/user.interface";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { User } from "../../types/user";
-import { JwtPayloadData } from "../../types/jwtPayloadData";
-import { ILoginUser } from "../../types/user";
+import { User } from "../types/user";
+import { JwtPayloadData } from "../types/jwtPayloadData";
+import { ILoginUser } from "../types/user";
 
 import { USER_MODEL_PROVIDER } from "../constants/providers";
 import { CONFIG } from "../constants/config";
