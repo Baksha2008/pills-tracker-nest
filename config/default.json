@@ -1,8 +1,6 @@
 {
-  "port": 3001,
+  "port": 8080,
   "dbpath": "mongodb+srv://test:12345@test-n5e25.mongodb.net/test?retryWrites=true",
-  
-    "expireTime": 600000,
-    "secret": "user"
-  
+  "expireTime": 600000,
+  "secret": "user"
 }

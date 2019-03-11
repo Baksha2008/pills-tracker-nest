@@ -6,7 +6,7 @@ import { ApiOperation, ApiResponse, ApiUseTags } from "@nestjs/swagger";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { LoginUserDto } from "./dto/login_user.dto";
 import { UsersService } from "./users.service";
-import { User } from "../../types/user";
+import { User } from "../types/user";
 
 import { STATUS_MESSAGE } from "../constants/statusMessage";
 import { USERS_ROUTES } from "./users.routes";
