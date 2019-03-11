@@ -18,7 +18,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "docker-build": "docker build -t test-nest .",
-    "docker-start": "docker run -d -p 8080 test-nest"
+    "docker-start": "docker run -p 8080 test-nest"
   },
   "dependencies": {
     "@nestjs/common": "^5.4.0",
