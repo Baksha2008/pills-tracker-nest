@@ -1,0 +1,13 @@
+demo:
+  build: 
+    image: pills-tracker-nest
+    dockerfile: Dockerfile
+  depends_on:
+    - node
+node:
+  image: node
+heroku-deployment:
+  image: codeship/heroku-deployment
+  encrypted_env_file: heroku-deployment.env.encrypted
+  volumes:
+    - ./:/deploy

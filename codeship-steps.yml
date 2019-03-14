@@ -1,0 +1,9 @@
+- type: parallel
+  steps:
+  - name: start
+    service: demo
+    command: npm run start
+- name: deploy
+  tag: master
+  service: codeship/heroku-deployment
+  command: codeship_heroku deploy /deploy 
